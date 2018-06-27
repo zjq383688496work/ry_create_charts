@@ -1,0 +1,16 @@
+# 日志
+logs
+*.log
+
+# npm依赖包目录
+node_modules
+
+# Bower
+bower_components/
+
+# IDE相关
+.idea/
+.vscode/
+
+# 目标文件目录
+dist
