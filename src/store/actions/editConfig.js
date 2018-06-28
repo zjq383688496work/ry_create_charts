@@ -17,9 +17,8 @@ export const addChart = (parentKey, key) => ({
 	key
 })
 
-export const updateChart = (idx, data) => ({
+export const updateChart = (data) => ({
 	type: types.UPDATE_CHART,
-	idx,
 	data
 })
 
@@ -34,9 +33,9 @@ export const deleteChart = (idx) => ({
 })
 
 
-export const selectChart = (data) => ({
+export const selectChart = (idx) => ({
 	type: types.SELECT_CHART,
-	data
+	idx
 })
 
 // 当前操作项

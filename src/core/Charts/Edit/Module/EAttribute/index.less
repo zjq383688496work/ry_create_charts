@@ -1,4 +1,39 @@
 .charts-attr {
 	width: 100%;
 	background-color: #f0f2f5;
+
+	.ca-row {
+		display: flex;
+		line-height: 20px;
+		padding: 4px 0;
+		align-items: center;
+		font-size: 12px;
+		position: relative;
+		.car-name {
+			width: 72px;
+		}
+		&:hover{ 
+			.delete {
+				display: block;
+			}
+		}
+		.delete {
+			display: none; 
+			position: absolute;
+			top:0;
+			left:50px;
+			height:20px;
+			width:20px; 
+			cursor: pointer;
+		}
+		.car-ctrl {
+			flex: 1;
+			font-size: 12px;
+		}
+		.car-auth {
+			text-align: right;
+			width: 24px;
+			height: 100%;
+		}
+	}
 }

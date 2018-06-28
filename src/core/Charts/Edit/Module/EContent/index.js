@@ -56,17 +56,21 @@ class EContent extends React.Component {
 	}
 
 	generateDOM() {
-		const { data } = this.props
+		const { data, curData } = this.props
 		return data.map((item, i) => {
 			return (
-				<div key={i} onClick={e => this.selectChart(e, i)}>
+				<div key={i} className={`cc-item${curData.idx === i? ' s-active': ''}`} onClick={e => this.selectChart(e, i)}>
 					<ChartsDraw data={item} idx={i} />
 				</div>
 			)
 		})
 	}
 
-	onLayoutChange = (layout) => {
+	onLayoutChange = (layout, oldItem, newItem, placeholder, e) => {
+		this.selectChart(e, +oldItem.i)
+		if(JSON.stringify(oldItem) === JSON.stringify(newItem)) {
+			return
+		}
 		const { actions } = this.props
 		actions.updateLayout(layout)
 	}

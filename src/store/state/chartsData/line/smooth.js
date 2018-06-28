@@ -57,18 +57,15 @@ module.exports = {
 					type: 'text',
 					value: ''
 				},
+				left: {
+					type: 'align'
+				},
 				textStyle: {
 					type: 'object',
 					value: {
 						color: {
 							type: 'color',
-							value: { color: '#333', alpha: 1 }
-						},
-						align: {
-							type: 'align'
-						},
-						verticalAlign: {
-							type: 'vAlign'
+							value: { color: '#333', alpha: 100 }
 						}
 					}
 				}

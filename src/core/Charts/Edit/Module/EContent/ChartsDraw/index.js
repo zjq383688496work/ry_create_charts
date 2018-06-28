@@ -61,31 +61,22 @@ class ChartsDraw extends React.Component {
 		}
 	}
 	componentWillMount() {
-		this.renderDom()
+		this.getData(2000)
 	}
 	componentWillReceiveProps() {
-		// this.renderDom()
 		// this.setState({ loading: true })
+		this.getData(1)
 	}
 	componentDidMount() {}
 
-	getData() {
+	getData(time) {
 		const { data } = this.props
-		return (resolve, reject) => {
-			setTimeout(() => {
-				this.setState({
-					opts: window.charts.chartsFormat(data)
-				})
-				resolve()
-			}, 2000)
-		}
-	}
-
-	renderDom() {
-		let promises = [new Promise(this.getData())]
-		Promise.all(promises).then(() => {
-			this.setState({ loading: false })
-		})
+		setTimeout(() => {
+			this.setState({
+				opts: window.charts.chartsFormat(data),
+				loading: false
+			})
+		}, time || 0)
 	}
 
 	render() {

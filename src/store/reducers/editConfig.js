@@ -50,6 +50,7 @@ export default function editConfig(state = initialState, action) {
 			}
 
 		case types.UPDATE_CHART:
+			charts[curData.idx] = data
 			return Object.assign({}, state)
 
 		case types.UPDATE_LAYOUT:

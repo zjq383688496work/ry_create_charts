@@ -28,6 +28,7 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "postcss-loader": "^2.1.5",
+    "rc-color-picker": "^1.2.6",
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-grid-layout": "^0.16.6",

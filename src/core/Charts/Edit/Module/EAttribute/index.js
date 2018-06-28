@@ -8,41 +8,40 @@
 'use strict';
 
 import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as actions from 'actions'
-
 import './index.less'
+
+import { Tabs } from 'antd'
+const { TabPane } = Tabs
+
+import EContent from './EContent'
+import EStyle   from './EStyle'
 
 class EAttribute extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-		}
+		// this.state = {}
 	}
 	componentWillMount() {}
 
 	componentDidMount() {}
 
+	onChange(value) {
+	}
+
 	render() {
 		return (
 			<div className="charts-attr">
-				属性
+				<Tabs type="card" animated={false} defaultActiveKey="style">
+					<TabPane tab="内容" key="content">
+						<EContent {...this.props} />
+					</TabPane>
+					<TabPane tab="样式" key="style">
+						<EStyle {...this.props} />
+					</TabPane>
+				</Tabs>
 			</div>
 		)
 	}
 }
 
-EAttribute.defaultProps = {
-}
-
-const mapStateToProps = state => state
-
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(actions, dispatch)
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(EAttribute)
+export default EAttribute

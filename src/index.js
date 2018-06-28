@@ -22,6 +22,7 @@ import NoMatch from '@core/NoMatch'
 
 import '@styles/common.less'
 import 'antd/dist/antd.less'
+import 'rc-color-picker/assets/index.css'
 import 'react-grid-layout/css/styles.css'
 
 import utils from '@public/utils'

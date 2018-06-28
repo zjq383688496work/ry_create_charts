@@ -38,7 +38,7 @@ module.exports = extend(window.charts, {
 
 	// 图表配置项格式化
 	chartsFormat(opts) {
-		console.clear()
+		// console.clear()
 		opts = deepCopy(opts)
 		const { data, options } = opts
 		// console.log(data, options)
@@ -51,5 +51,10 @@ module.exports = extend(window.charts, {
 
 		// console.log(mod)
 		return mod
+	},
+
+	// 图表样式配置项格式化
+	chartsStyleFormat(opts) {
+
 	}
 })
