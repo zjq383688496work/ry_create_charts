@@ -26,7 +26,7 @@ module.exports = extend(window.charts, {
 			}
 			if (type === 'color') {
 				let { color, alpha } = value
-				var rgba = [ ...color.colorRGB(), ( alpha || 1 ) * 100 ]
+				var rgba = [ ...color.colorRGB(), alpha || 100 ]
 				obj[_] = `rgba(${rgba.join(',')})`
 			}
 			if (obj[_] === 'null') {

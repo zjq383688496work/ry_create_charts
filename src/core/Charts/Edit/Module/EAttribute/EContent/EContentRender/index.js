@@ -54,8 +54,8 @@ class EStyleRender extends React.Component {
 
 	dataFormat(obj, name) {
 		let { type, value } = obj
+		if (type === 'type') return null
 		if (value === undefined) {
-			debugger
 			value = obj.value = deepCopy(cData[type].default)
 		}
 		switch (type) {
@@ -119,14 +119,16 @@ class EStyleRender extends React.Component {
 	}
 
 	renderDom(data, name) {
-		data.map((_, i) => {
-			return this.dataFormat(_, name)
+		return data.map((_, i) => {
+			return Object.keys(_).map((p, j) => {
+				return this.dataFormat(_[p], p)
+			})
 		})
 	}
 
 	render() {
 		const { actions, data, name } = this.props
-		const dom = this.dataFormat(data, name)
+		const dom = this.renderDom(data, name)
 		return (
 			<div className="ca-content-render">
 				<Collapse defaultActiveKey={['1']}>

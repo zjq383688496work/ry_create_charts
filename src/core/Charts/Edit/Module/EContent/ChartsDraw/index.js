@@ -16,7 +16,7 @@ import { Spin } from 'antd'
 import ReactEchartsCore       from 'echarts-for-react/lib/core'
 import echarts from 'echarts/lib/echarts'
 import 'echarts/lib/chart/line'
-// import 'echarts/lib/chart/bar'
+import 'echarts/lib/chart/bar'
 // import 'echarts/lib/chart/pie'
 // import 'echarts/lib/chart/scatter'
 // import 'echarts/lib/chart/radar'
@@ -90,7 +90,8 @@ class ChartsDraw extends React.Component {
 		const { loading, data } = this.state
 
 		// !loading && console.log(data)
-		console.log(idx, loading)
+		// console.log(idx, loading)
+		if (!loading) console.log(JSON.stringify(window.charts.chartsFormat(data) || {}))
 		return (
 			<div className="charts-draw">
 				{ loading? <Spin/>: (
