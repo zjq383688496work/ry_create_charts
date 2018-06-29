@@ -15,15 +15,15 @@ module.exports = {
 	color:         { type: 'color', default: { color: '#333', alpha: 100 } },
 	/* Style */
 	// 水平对齐
-	align:         { type: 'radio', default: '', options: [
-		{ name: '无',   value: '' },
+	align:         { type: 'radio', default: 'null', options: [
+		{ name: '无',   value: 'null' },
 		{ name: '左',   value: 'left' },
 		{ name: '居中', value: 'center' },
 		{ name: '右',   value: 'right' }
 	] },
 	// 垂直对齐
-	vAlign:        { type: 'radio', default: '', options: [
-		{ name: '无',   value: '' },
+	vAlign:        { type: 'radio', default: 'null', options: [
+		{ name: '无',   value: 'null' },
 		{ name: '顶部', value: 'top' },
 		{ name: '居中', value: 'middle' },
 		{ name: '底部', value: 'bottom' }

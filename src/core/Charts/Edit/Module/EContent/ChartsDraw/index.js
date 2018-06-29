@@ -64,8 +64,14 @@ class ChartsDraw extends React.Component {
 		this.getData(2000)
 	}
 	componentWillReceiveProps() {
-		// this.setState({ loading: true })
-		this.getData(1)
+		let od  = this.props.data,
+			nd  = this.state.data
+		if (od && nd) {
+			let ods = JSON.stringify({ ...od.data, ...od.options }),
+				nds = JSON.stringify({ ...nd.data, ...nd.options })
+			if (ods === nds) return
+		}
+		this.getData()
 	}
 	componentDidMount() {}
 
@@ -73,33 +79,34 @@ class ChartsDraw extends React.Component {
 		const { data } = this.props
 		setTimeout(() => {
 			this.setState({
-				opts: window.charts.chartsFormat(data),
+				data: data,
 				loading: false
 			})
 		}, time || 0)
 	}
 
 	render() {
-		const { idx, data } = this.props
-		const { loading, opts } = this.state
+		const { idx } = this.props
+		const { loading, data } = this.state
 
-		console.log(opts)
+		// !loading && console.log(data)
+		console.log(idx, loading)
 		return (
 			<div className="charts-draw">
-				<div className="cd-layout">
-					{ JSON.stringify(data.layout) }
-				</div>
 				{ loading? <Spin/>: (
 					<ReactEchartsCore
 						echarts={echarts}
 						notMerge={true}
 						lazyUpdate={true}
-						option={opts || {}}
+						option={window.charts.chartsFormat(data) || {}}
 						style={{height: '100%'}}
 					/>
 				) }
 			</div>
 		)
+				// <div className="cd-layout">
+				// 	{ JSON.stringify(data.layout) }
+				// </div>
 	}
 }
 

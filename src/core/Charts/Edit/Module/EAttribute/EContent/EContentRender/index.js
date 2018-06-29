@@ -20,9 +20,9 @@ const cData  = require('@state/chartsData/default')
 import Color from '@module/Color'
 
 const styleMap = {
-	animation: '动画开关',
-	title: '标题',
-	tooltip: '提示框',
+	series: '数据',
+	xAxis:  'X轴',
+	yAxis:  'Y轴'
 }
 const childStyleMap = {
 	color: '颜色',
@@ -33,7 +33,9 @@ const childStyleMap = {
 	verticalAlign: '垂直对齐',
 	show: '显示',
 	text: '文本',
-	left: '对齐'
+	left: '对齐',
+
+	boundaryGap: '刻度分隔线'
 }
 
 class EStyleRender extends React.Component {
@@ -53,6 +55,7 @@ class EStyleRender extends React.Component {
 	dataFormat(obj, name) {
 		let { type, value } = obj
 		if (value === undefined) {
+			debugger
 			value = obj.value = deepCopy(cData[type].default)
 		}
 		switch (type) {
@@ -115,11 +118,17 @@ class EStyleRender extends React.Component {
 		)
 	}
 
+	renderDom(data, name) {
+		data.map((_, i) => {
+			return this.dataFormat(_, name)
+		})
+	}
+
 	render() {
 		const { actions, data, name } = this.props
 		const dom = this.dataFormat(data, name)
 		return (
-			<div className="ca-style-render">
+			<div className="ca-content-render">
 				<Collapse defaultActiveKey={['1']}>
 					<Panel header={styleMap[name]} key="1">
 						{ dom }

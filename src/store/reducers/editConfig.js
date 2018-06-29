@@ -37,7 +37,7 @@ export default function editConfig(state = initialState, action) {
 					moved:  false,
 					static: false
 				}
-				console.log(da.layout)
+				// console.log(da.layout)
 				charts.push(da)
 				state.curChart = da
 				curData.idx    = charts.length - 1
@@ -58,7 +58,7 @@ export default function editConfig(state = initialState, action) {
 				let l = charts[i].layout
 				Object.keys(l).map((p, j) => {
 					l[p] = _[p]
-					console.log(p)
+					// console.log(p)
 				})
 			})
 			return Object.assign({}, state)

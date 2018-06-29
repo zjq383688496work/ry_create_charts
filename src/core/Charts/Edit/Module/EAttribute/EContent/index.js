@@ -10,9 +10,7 @@
 import React from 'react'
 import './index.less'
 
-import { Radio, Tabs } from 'antd'
-const { Button, Group } = Radio
-const { TabPane } = Tabs
+import EContentRender from './EContentRender'
 
 class EContent extends React.Component {
 	constructor(props) {
@@ -23,14 +21,27 @@ class EContent extends React.Component {
 
 	componentDidMount() {}
 
-	onChange(value) {
+	onChange = () => {
+		const { actions, data } = this.props
+		const { options } = data
+		console.log(options)
+		// debugger
+		actions.updateChart(data)
+	}
+
+	renderDom(actions, opts) {
+		return Object.keys(opts).map((_, i) => {
+			return (<EContentRender onChange={this.onChange} actions={actions} key={i} name={_} data={opts[_]} />)
+		})
 	}
 
 	render() {
 		const { actions, data } = this.props
+		if (isEmptyObject(data)) return null
+		const dom = this.renderDom(actions, data.data)
 		return (
 			<div className="ca-content">
-				内容
+				{ dom }
 			</div>
 		)
 	}

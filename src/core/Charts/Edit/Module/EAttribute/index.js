@@ -31,7 +31,7 @@ class EAttribute extends React.Component {
 	render() {
 		return (
 			<div className="charts-attr">
-				<Tabs type="card" animated={false} defaultActiveKey="style">
+				<Tabs type="card" animated={false} defaultActiveKey="content">
 					<TabPane tab="内容" key="content">
 						<EContent {...this.props} />
 					</TabPane>

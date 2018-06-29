@@ -29,7 +29,7 @@ module.exports = extend(window.charts, {
 				var rgba = [ ...color.colorRGB(), ( alpha || 1 ) * 100 ]
 				obj[_] = `rgba(${rgba.join(',')})`
 			}
-			if (obj[_] === null) {
+			if (obj[_] === 'null') {
 				delete obj[_]
 			}
 		})
