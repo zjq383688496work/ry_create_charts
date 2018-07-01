@@ -16,7 +16,7 @@ module.exports = {
 		Ajax.get(url).then(res => {
 			var { data } = res,
 				{ meta } = data
-			if (metaerrno !== 0) {
+			if (meta.errno !== 0) {
 				if (err) return err(res)
 				return message.error('请求失败!')
 			}

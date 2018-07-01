@@ -38,7 +38,7 @@ class EGlobal extends React.Component {
 	}
 
 	render() {
-		const { actions, global } = this.props
+		const { actions, global, cache } = this.props
 		if (isEmptyObject(global)) return null
 		const dom = this.renderDom(actions, global, cache)
 		return (

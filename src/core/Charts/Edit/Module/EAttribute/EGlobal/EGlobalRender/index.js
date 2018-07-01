@@ -55,13 +55,38 @@ class EGlobal extends React.Component {
 
 	componentDidMount() {}
 
-	onChangeAPI(val, parent, key) {
-		let { data, actions, global } = this.props
-		if (key) parent.value[key] = val
-		// else parent.value = val
+	getData(key) {
+		var api = apiMap[key].data
+		return (resolve, reject) => {
+			Ajax.get(api, res => {
+				debugger
+				resolve('数据')
+			}, e => reject(e))
+		}
+	}
+	getMap(key) {
+		var api = apiMap[key].map
+		return (resolve, reject) => {
+			Ajax.get(api, res => {
+				debugger
+				resolve('数据')
+			}, e => reject(e))
+		}
+	}
 
-		debugger
-		// this.props.onChange()
+	onChangeAPI(val, parent, key) {
+		let { actions, data, cache } = this.props
+		parent.value.api = val
+		if (!val) {
+			delete cache[val]
+			this.props.onChange()
+		} else {
+			let arr = ['getData', 'getMap']
+			let promises = arr.map(key => new Promise(this[key](val)))
+			Promise.all(promises).then(() => {
+				debugger
+			})
+		}
 	}
 
 	dataTheme(obj) {
@@ -74,7 +99,7 @@ class EGlobal extends React.Component {
 			return Fn && (
 				<div key={i} className="ca-row">
 					<div className="car-name">{ childStyleMap[name] || name }</div>
-					<div className="car-ctrl">{ Fn(value, node) }</div>
+					<div className="car-ctrl">{ Fn(value, node, _) }</div>
 				</div>
 			)
 		})
@@ -103,10 +128,10 @@ class EGlobal extends React.Component {
 		)
 	}
 	// 筛选框
-	render_api = (val, parent) => {
+	render_api = (val, parent, key) => {
 		let { api } = val
 		return (
-			<Select size="small" onChange={v => this.onChangeAPI(v, parent, 'api')} value={api}>
+			<Select size="small" onChange={v => this.onChangeAPI(v, parent, key)} value={api}>
 				{ apis.map((_, i) => (<Option key={i} value={_.value}>{_.name}</Option>)) }
 			</Select>
 		)
