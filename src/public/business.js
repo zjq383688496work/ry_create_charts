@@ -35,17 +35,26 @@ module.exports = extend(window.charts, {
 		})
 		return obj
 	},
-
+	dataBind(obj, cache) {
+		const { bind, data } = obj
+		const key = bind.value
+		const ca  = cache['api0']
+		if (!key || !(ca && ca.data)) return obj
+		data.value = ca.data.map((_, i) => {
+			return _[key]
+		})
+		delete obj.bind
+		return obj
+	},
 	// 图表配置项格式化
-	chartsFormat(opts) {
+	chartsFormat(opts, cache) {
 		// console.clear()
 		opts = deepCopy(opts)
 		const { data, options } = opts
-		// console.log(data, options)
 		const { series, xAxis, yAxis } = data
 
 		let mod = this.dataFormat(options)
-		mod.series = series.map((_) => this.dataFormat(_))
+		mod.series = series.map((_) => this.dataFormat(this.dataBind(_, cache)))
 		xAxis && (mod.xAxis = xAxis.map((_) => this.dataFormat(_)))
 		yAxis && (mod.yAxis = yAxis.map((_) => this.dataFormat(_)))
 

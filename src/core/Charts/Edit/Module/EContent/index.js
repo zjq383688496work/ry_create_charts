@@ -56,11 +56,11 @@ class EContent extends React.Component {
 	}
 
 	generateDOM() {
-		const { data, curData } = this.props
+		const { data, curData, cache } = this.props
 		return data.map((item, i) => {
 			return (
 				<div key={i} className={`cc-item${curData.idx === i? ' s-active': ''}`} onClick={e => this.selectChart(e, i)}>
-					<ChartsDraw data={item} idx={i} />
+					<ChartsDraw data={item} idx={i} cache={cache} />
 				</div>
 			)
 		})

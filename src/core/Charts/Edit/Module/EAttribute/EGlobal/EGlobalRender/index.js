@@ -46,7 +46,7 @@ const apis = [
 	{ name: '全局数据', value: 'global' }
 ]
 
-class EGlobal extends React.Component {
+class EGlobalRender extends React.Component {
 	constructor(props) {
 		super(props)
 		// this.state = {}
@@ -73,21 +73,19 @@ class EGlobal extends React.Component {
 			}, e => reject(e))
 		}
 	}
-
 	onChangeAPI(val, parent, key) {
 		let { actions, data, cache, onChange } = this.props
 		parent.value.api = val
 		if (!val) {
-			delete cache[val]
+			delete cache[key]
 			onChange()
 		} else {
 			cache[key] = {}
 			let arr = ['getData', 'getMap']
 			let promises = arr.map(_ => new Promise(this[_](val, cache[key])))
+			onChange()
 			Promise.all(promises).then(() => {
-				console.log(cache[key])
-				onChange()
-				// actions
+				actions.updateCache(cache)
 			})
 		}
 	}
@@ -163,4 +161,4 @@ class EGlobal extends React.Component {
 	}
 }
 
-export default EGlobal
+export default EGlobalRender

@@ -53,7 +53,7 @@ class EditComponent extends React.Component {
 						<EAttribute actions={actions} data={curChart} global={config.global} cache={cache} />
 					</div>
 					<div className="lay-content">
-						{ render? <EContent actions={actions} data={config.charts} curData={curData} />: <Spin/> }
+						{ render? <EContent actions={actions} data={config.charts} curData={curData} cache={cache} />: <Spin/> }
 					</div>
 				</div>
 			</div>

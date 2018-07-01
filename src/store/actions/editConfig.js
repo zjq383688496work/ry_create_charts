@@ -49,3 +49,10 @@ export const updateCopyChart = (data) => ({
 	type: types.UPDATE_COPYCHART,
 	data
 })
+
+
+// 更新缓存
+export const updateCache = (data) => ({
+	type: types.UPDATE_CACHE,
+	data
+})

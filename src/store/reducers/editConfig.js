@@ -72,6 +72,10 @@ export default function editConfig(state = initialState, action) {
 			state.curChart = charts[idx]
 			return Object.assign({}, state)
 
+		case types.UPDATE_CACHE:
+			state.cache = data
+			return Object.assign({}, state)
+
 		default:
 			return state
 	}

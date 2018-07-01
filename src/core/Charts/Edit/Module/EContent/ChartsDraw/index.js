@@ -86,12 +86,12 @@ class ChartsDraw extends React.Component {
 	}
 
 	render() {
-		const { idx } = this.props
+		const { idx, cache } = this.props
 		const { loading, data } = this.state
 
 		// !loading && console.log(data)
 		// console.log(idx, loading)
-		if (!loading) console.log(JSON.stringify(window.charts.chartsFormat(data) || {}))
+		// if (!loading) console.log(JSON.stringify(window.charts.chartsFormat(data) || {}))
 		return (
 			<div className="charts-draw">
 				{ loading? <Spin/>: (
@@ -99,7 +99,7 @@ class ChartsDraw extends React.Component {
 						echarts={echarts}
 						notMerge={true}
 						lazyUpdate={true}
-						option={window.charts.chartsFormat(data) || {}}
+						option={window.charts.chartsFormat(data, cache) || {}}
 						style={{height: '100%'}}
 					/>
 				) }

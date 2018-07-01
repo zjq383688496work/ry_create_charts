@@ -39,7 +39,7 @@ const childStyleMap = {
 	boundaryGap: '刻度分隔线'
 }
 
-class EStyleRender extends React.Component {
+class EContentRender extends React.Component {
 	constructor(props) {
 		super(props)
 		// this.state = {}
@@ -120,9 +120,17 @@ class EStyleRender extends React.Component {
 	}
 	// 字段
 	render_field = (val, parent) => {
+		const { cache } = this.props
+		const ca = cache['api0']
+		let opts
+		if (ca && ca.map) {
+			const { map } = ca
+			opts = map? Object.keys(map).map((_, i) => <Option key={i} value={_}>{map[_]}</Option>): null
+		}
 		return (
-			<Select value="">
+			<Select value={val} onChange={v => this.onChange(v, parent)}>
 				<Option value="">无</Option>
+				{ opts }
 			</Select>
 		)
 	}
@@ -150,4 +158,4 @@ class EStyleRender extends React.Component {
 	}
 }
 
-export default EStyleRender
+export default EContentRender
