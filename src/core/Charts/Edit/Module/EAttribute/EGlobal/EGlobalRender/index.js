@@ -75,17 +75,18 @@ class EGlobal extends React.Component {
 	}
 
 	onChangeAPI(val, parent, key) {
-		let { actions, data, cache } = this.props
+		let { actions, data, cache, onChange } = this.props
 		parent.value.api = val
 		if (!val) {
 			delete cache[val]
-			this.props.onChange()
+			onChange()
 		} else {
 			cache[key] = {}
 			let arr = ['getData', 'getMap']
 			let promises = arr.map(_ => new Promise(this[_](val, cache[key])))
 			Promise.all(promises).then(() => {
 				console.log(cache[key])
+				onChange()
 				// actions
 			})
 		}
