@@ -16,7 +16,7 @@ module.exports = {
 					type:  'api',
 					name:  '全局数据',
 					value: {
-						api: 'global'
+						api: ''
 					}
 				},
 				color0: {

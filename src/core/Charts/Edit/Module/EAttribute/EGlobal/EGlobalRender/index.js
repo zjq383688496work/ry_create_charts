@@ -55,20 +55,20 @@ class EGlobal extends React.Component {
 
 	componentDidMount() {}
 
-	getData(key) {
-		var api = apiMap[key].data
+	getData(val, cache) {
+		let api = apiMap[val].data
 		return (resolve, reject) => {
 			Ajax.get(api, res => {
-				debugger
+				cache.data = res
 				resolve('数据')
 			}, e => reject(e))
 		}
 	}
-	getMap(key) {
-		var api = apiMap[key].map
+	getMap(val, cache) {
+		let api = apiMap[val].map
 		return (resolve, reject) => {
 			Ajax.get(api, res => {
-				debugger
+				cache.map = res
 				resolve('数据')
 			}, e => reject(e))
 		}
@@ -81,10 +81,12 @@ class EGlobal extends React.Component {
 			delete cache[val]
 			this.props.onChange()
 		} else {
+			cache[key] = {}
 			let arr = ['getData', 'getMap']
-			let promises = arr.map(key => new Promise(this[key](val)))
+			let promises = arr.map(_ => new Promise(this[_](val, cache[key])))
 			Promise.all(promises).then(() => {
-				debugger
+				console.log(cache[key])
+				// actions
 			})
 		}
 	}
