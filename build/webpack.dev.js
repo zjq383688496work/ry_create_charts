@@ -32,8 +32,8 @@ Object.assign(config, {
 		hot: true,
 		noInfo: false,
 		proxy: {
-			'^/php_wechat/manage/**': {
-				target: 'http://wx.dev1.rongyi.com',
+			'/api/charts': {
+				target: 'http://localhost:4080',
 				secure: false,
 				changeOrigin: 'true',
 			}

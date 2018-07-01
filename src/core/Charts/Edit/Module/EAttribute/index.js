@@ -15,6 +15,7 @@ const { TabPane } = Tabs
 
 import EContent from './EContent'
 import EStyle   from './EStyle'
+import EGlobal  from './EGlobal'
 
 class EAttribute extends React.Component {
 	constructor(props) {
@@ -31,12 +32,15 @@ class EAttribute extends React.Component {
 	render() {
 		return (
 			<div className="charts-attr">
-				<Tabs type="card" animated={false} defaultActiveKey="content">
+				<Tabs type="card" animated={false} defaultActiveKey="global">
 					<TabPane tab="内容" key="content">
 						<EContent {...this.props} />
 					</TabPane>
 					<TabPane tab="样式" key="style">
 						<EStyle {...this.props} />
+					</TabPane>
+					<TabPane tab="全局" key="global">
+						<EGlobal {...this.props} />
 					</TabPane>
 				</Tabs>
 			</div>

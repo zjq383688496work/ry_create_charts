@@ -10,10 +10,11 @@
 import React from 'react'
 import './index.less'
 
-import { Checkbox, Collapse, Input, Radio, Tabs } from 'antd'
+import { Checkbox, Collapse, Input, Radio, Select, Tabs } from 'antd'
 const { Button, Group } = Radio
-const { TabPane } = Tabs
 const { Panel }   = Collapse
+const { Option }  = Select
+const { TabPane } = Tabs
 
 const cData  = require('@state/chartsData/default')
 
@@ -115,6 +116,14 @@ class EStyleRender extends React.Component {
 			<Checkbox
 				checked={val} onChange={v => this.onChange(v.target.checked? true: false, parent)}
 			/>
+		)
+	}
+	// 字段
+	render_field = (val, parent) => {
+		return (
+			<Select value="">
+				<Option value="">无</Option>
+			</Select>
 		)
 	}
 

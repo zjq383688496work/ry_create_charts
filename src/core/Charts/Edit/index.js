@@ -41,7 +41,8 @@ class EditComponent extends React.Component {
 	render() {
 		const { actions, editConfig } = this.props
 		const { render } = this.state
-		const { config, curData, curChart } = editConfig
+		const { config, curData, curChart, global, cache } = editConfig
+
 		return (
 			<div className="lay-win flex-col">
 				<div className="lay-header">
@@ -49,7 +50,7 @@ class EditComponent extends React.Component {
 				</div>
 				<div className="lay-row flex-1">
 					<div className="lay-sidebar">
-						<EAttribute actions={actions} data={curChart} />
+						<EAttribute actions={actions} data={curChart} global={config.global} cache={cache} />
 					</div>
 					<div className="lay-content">
 						{ render? <EContent actions={actions} data={config.charts} curData={curData} />: <Spin/> }

@@ -22,5 +22,6 @@ module.exports = extend(window, {
 			console.error(e)
 			return obj
 		}
-	}
+	},
+	Ajax: require('./ajax')
 })

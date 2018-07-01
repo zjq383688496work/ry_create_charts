@@ -2,17 +2,47 @@ module.exports = {
 	layout: {},
 	content: {
 		map: {},
-		api: {}
+		api: {
+			type: 'api',
+			value: {}
+		}
 	},
 	data: {
 		series: [
 			{
+				bind: {
+					type: 'field'
+				},
 				data: {
 					type: 'dataNumber'
 				},
 				stack: {
 					type: 'text',
 					value: '总量'
+				},
+				areaStyle: {
+					type: 'object',
+					value: {
+						normal: {
+							type: 'object'
+						}
+					}
+				},
+				type: {
+					type: 'type',
+					value: 'line'
+				}
+			},
+			{
+				bind: {
+					type: 'field'
+				},
+				data: {
+					type: 'dataNumber'
+				},
+				stack: {
+					type: 'text',
+					value: '总量2'
 				},
 				areaStyle: {
 					type: 'object',

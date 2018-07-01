@@ -4,5 +4,7 @@ module.exports = {
 	curChart: {},
 	// 当前操作数据
 	curData:  require('./cur/curData'),
-	config:   require('./charts')
+	config:   require('./charts'),
+	cache:    {
+	}
 }
