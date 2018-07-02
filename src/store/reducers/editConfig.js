@@ -17,6 +17,7 @@ export default function editConfig(state = initialState, action) {
 		curChart  = state.curChart,
 		config    = state.config,
 		charts    = config.charts,
+		global    = config.global,
 		idx       = action.idx,
 		data      = action.data,
 		parentKey = action.parentKey,
@@ -26,7 +27,9 @@ export default function editConfig(state = initialState, action) {
 		// 组件操作
 		case types.ADD_CHART:
 			try {
+				++global.charts.max
 				const da  = deepCopy(chartsData[parentKey].child[key])
+				da.id = global.charts.max
 				const len = charts.length
 				da.layout = {
 					x: (len * 2) % curData.cols,
@@ -37,12 +40,10 @@ export default function editConfig(state = initialState, action) {
 					moved:  false,
 					static: false
 				}
-				// console.log(da.layout)
 				charts.push(da)
 				state.curChart = da
 				curData.idx    = charts.length - 1
 				curData.type   = 'charts'
-				
 				return Object.assign({}, state)
 			} catch(e) {
 				console.log(e)
@@ -58,7 +59,6 @@ export default function editConfig(state = initialState, action) {
 				let l = charts[i].layout
 				Object.keys(l).map((p, j) => {
 					l[p] = _[p]
-					// console.log(p)
 				})
 			})
 			return Object.assign({}, state)

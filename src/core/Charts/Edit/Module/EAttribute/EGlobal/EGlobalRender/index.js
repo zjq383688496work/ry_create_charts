@@ -43,13 +43,12 @@ const apiMap = {
 }
 const apis = [
 	{ name: '无', value: '' },
-	{ name: '全局数据', value: 'global' }
+	{ name: '整体数据', value: 'global' }
 ]
 
 class EGlobalRender extends React.Component {
 	constructor(props) {
 		super(props)
-		// this.state = {}
 	}
 	componentWillMount() {}
 
@@ -75,21 +74,21 @@ class EGlobalRender extends React.Component {
 	}
 	onChangeAPI(val, parent, key) {
 		let { actions, data, cache, onChange } = this.props
+		let k = `c_${key}`
 		parent.value.api = val
 		if (!val) {
-			delete cache[key]
+			delete cache[k]
 			onChange()
 		} else {
-			cache[`g_${key}`] = {}
+			cache[k] = {}
 			let arr = ['getData', 'getMap']
-			let promises = arr.map(_ => new Promise(this[_](val, cache[`g_${key}`])))
+			let promises = arr.map(_ => new Promise(this[_](val, cache[k])))
 			onChange()
 			Promise.all(promises).then(() => {
 				actions.updateCache(cache)
 			})
 		}
 	}
-
 	dataTheme(obj) {
 		let { config } = obj
 		let { api, color } = config
@@ -114,18 +113,6 @@ class EGlobalRender extends React.Component {
 				</Card>
 			)
 		})
-		// return list.map((_, i) => {
-		// 	let node = config[_],
-		// 		{ name, type, value } = node,
-		// 		Fn = this[`render_${type}`]
-		// 	if (!Fn || !name) return null
-		// 	return Fn && (
-		// 		<div key={i} className="ca-row">
-		// 			<div className="car-name">{ childStyleMap[name] || name }</div>
-		// 			<div className="car-ctrl">{ Fn(value, node, _) }</div>
-		// 		</div>
-		// 	)
-		// })
 	}
 
 	/* 渲染子模块 */

@@ -9,7 +9,8 @@ module.exports = {
 	},
 	data: {
 		api: {
-			type: 'api'
+			type: 'api',
+			api: ''
 		},
 		series: [
 			{
@@ -21,7 +22,8 @@ module.exports = {
 				},
 				stack: {
 					type: 'text',
-					value: '总量'
+					value: '总量',
+					auth: false
 				},
 				areaStyle: {
 					type: 'object',
@@ -33,7 +35,8 @@ module.exports = {
 				},
 				type: {
 					type: 'type',
-					value: 'line'
+					value: 'line',
+					auth: false
 				}
 			},
 			{
@@ -45,7 +48,8 @@ module.exports = {
 				},
 				stack: {
 					type: 'text',
-					value: '总量'
+					value: '总量',
+					auth: false
 				},
 				areaStyle: {
 					type: 'object',
@@ -57,7 +61,8 @@ module.exports = {
 				},
 				type: {
 					type: 'type',
-					value: 'line'
+					value: 'line',
+					auth: false
 				}
 			}
 		],

@@ -8,6 +8,9 @@ module.exports = {
 		}
 	},
 	data: {
+		api: {
+			type: 'api'
+		},
 		series: [
 			{
 				bind: {
@@ -96,33 +99,6 @@ module.exports = {
 				backgroundColor: {
 					type: 'color',
 					value: { color: '#333', alpha: 70 }
-				}
-			}
-		},
-		toolbox: {
-			type: 'object',
-			value: {
-				show: {
-					type: 'checkbox',
-					value: true
-				},
-				feature: {
-					type: 'object',
-					value: {
-						magicType: {
-							type: 'object',
-							value: {
-								show: {
-									type: 'checkbox',
-									value: true
-								},
-								type: {
-									type: 'magictype',
-									value: ['stack', 'tiled']
-								}
-							}
-						}
-					}
 				}
 			}
 		},

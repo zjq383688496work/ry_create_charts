@@ -1,12 +1,17 @@
 // 图表数据大纲
 module.exports = {
-	title:   '首页',	// 页面标题
-	charts:  [],	// 图标对象
+
+	charts:  [],	// 图表对象
 	global:  {
 		idx: 0,
-		max: {
-			api:   1,
-			color: 1
+		charts: {
+			max: 0
+		},
+		api: {
+			max: {
+				api:   1,
+				color: 1
+			}
 		},
 		themes: [{
 			name: '主题1',
