@@ -5,7 +5,7 @@ module.exports = {
 	// 动画开关
 	animation:     { type: 'boolean', default: false },
 	// 触发类型
-	trigger:       { type: 'radio', default: 'item', options: [
+	trigger:       { type: 'radio', default: 'axis', options: [
 		{ name: '数据项', value: 'item' },
 		{ name: '坐标轴', value: 'axis' },
 		{ name: '不触发', value: 'none' }
@@ -29,5 +29,11 @@ module.exports = {
 		{ name: '底部', value: 'bottom' }
 	] },
 	// 对象
-	object:        { type: 'object', default: {} }
+	object:        { type: 'object', default: {} },
+	magictype:     { type: 'checkbox', default: [], options: [
+		{ name: '折线图',   value: 'line' },
+		{ name: '柱状图',   value: 'bar' },
+		{ name: '堆叠模式', value: 'stack' },
+		{ name: '平铺模式', value: 'tiled' }
+	] }
 }

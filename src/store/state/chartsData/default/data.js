@@ -1,7 +1,11 @@
 let apis = [
 	{
-		name: '总体数据',
-		value: '/api/data'
+		name: '自定义',
+		value: 'custom',
+		data: {
+			api: '',
+			params: {}
+		}
 	}
 ]
 

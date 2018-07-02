@@ -29,16 +29,16 @@ class EContent extends React.Component {
 		actions.updateChart(data)
 	}
 
-	renderDom(actions, opts, cache) {
+	renderDom(actions, opts, cache, global) {
 		return Object.keys(opts).map((_, i) => {
-			return (<EContentRender onChange={this.onChange} actions={actions} key={i} name={_} data={opts[_]} cache={cache} />)
+			return (<EContentRender onChange={this.onChange} actions={actions} key={i} name={_} data={opts[_]} cache={cache} global={global} parent={opts} />)
 		})
 	}
 
 	render() {
-		const { actions, data, cache } = this.props
+		const { actions, data, cache, global } = this.props
 		if (isEmptyObject(data)) return null
-		const dom = this.renderDom(actions, data.data, cache)
+		const dom = this.renderDom(actions, data.data, cache, global)
 		return (
 			<div className="ca-content">
 				{ dom }

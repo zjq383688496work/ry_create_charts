@@ -10,7 +10,7 @@
 import React from 'react'
 import './index.less'
 
-import { Checkbox, Collapse, Input, Select, Tabs } from 'antd'
+import { Card, Checkbox, Collapse, Input, Select, Tabs } from 'antd'
 const { Option } = Select
 const { TabPane } = Tabs
 const { Panel }   = Collapse
@@ -80,9 +80,9 @@ class EGlobalRender extends React.Component {
 			delete cache[key]
 			onChange()
 		} else {
-			cache[key] = {}
+			cache[`g_${key}`] = {}
 			let arr = ['getData', 'getMap']
-			let promises = arr.map(_ => new Promise(this[_](val, cache[key])))
+			let promises = arr.map(_ => new Promise(this[_](val, cache[`g_${key}`])))
 			onChange()
 			Promise.all(promises).then(() => {
 				actions.updateCache(cache)
@@ -91,19 +91,41 @@ class EGlobalRender extends React.Component {
 	}
 
 	dataTheme(obj) {
-		let { config, list } = obj
-		return list.map((_, i) => {
-			let node = config[_],
-				{ name, type, value } = node,
-				Fn = this[`render_${type}`]
-			if (!Fn || !name) return null
-			return Fn && (
-				<div key={i} className="ca-row">
-					<div className="car-name">{ childStyleMap[name] || name }</div>
-					<div className="car-ctrl">{ Fn(value, node, _) }</div>
-				</div>
+		let { config } = obj
+		let { api, color } = config
+
+		return Object.keys(config).map((_, i) => {
+			let nod = config[_],
+				dom = Object.keys(nod).map((p, j) => {
+					let node = nod[p],
+						{ name, type, value } = node,
+						Fn = this[`render_${type}`]
+					if (!Fn || !name) return null
+					return Fn && (
+						<div key={j} className="ca-row">
+							<div className="car-name">{ childStyleMap[name] || name }</div>
+							<div className="car-ctrl">{ Fn(value, node, p) }</div>
+						</div>
+					)
+				})
+			return (
+				<Card title={_} key={i}>
+					{ dom }
+				</Card>
 			)
 		})
+		// return list.map((_, i) => {
+		// 	let node = config[_],
+		// 		{ name, type, value } = node,
+		// 		Fn = this[`render_${type}`]
+		// 	if (!Fn || !name) return null
+		// 	return Fn && (
+		// 		<div key={i} className="ca-row">
+		// 			<div className="car-name">{ childStyleMap[name] || name }</div>
+		// 			<div className="car-ctrl">{ Fn(value, node, _) }</div>
+		// 		</div>
+		// 	)
+		// })
 	}
 
 	/* 渲染子模块 */
@@ -132,7 +154,7 @@ class EGlobalRender extends React.Component {
 	render_api = (val, parent, key) => {
 		let { api } = val
 		return (
-			<Select size="small" onChange={v => this.onChangeAPI(v, parent, key)} value={api}>
+			<Select size="small" style={{ width: 120 }} onChange={v => this.onChangeAPI(v, parent, key)} value={api}>
 				{ apis.map((_, i) => (<Option key={i} value={_.value}>{_.name}</Option>)) }
 			</Select>
 		)
@@ -150,14 +172,15 @@ class EGlobalRender extends React.Component {
 		const { actions, data } = this.props
 		const dom = this.dataTheme(data)
 		return (
-			<div className="ca-style-render">
-				<Collapse defaultActiveKey={['1']}>
-					<Panel header={styleMap[name]} key="1">
-						{ dom }
-					</Panel>
-				</Collapse>
+			<div className="ca-global-render">
+				{ dom }
 			</div>
 		)
+				// <Collapse defaultActiveKey={['1']}>
+				// 	<Panel header={'配置项'} key="1">
+				// 		{ dom }
+				// 	</Panel>
+				// </Collapse>
 	}
 }
 

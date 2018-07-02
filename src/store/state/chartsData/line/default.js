@@ -2,11 +2,17 @@ module.exports = {
 	layout: {},
 	content: {
 		map: {},
-		api: {}
+		api: {
+			type: 'api',
+			value: {}
+		}
 	},
 	data: {
 		series: [
 			{
+				bind: {
+					type: 'field'
+				},
 				data: {
 					type: 'dataNumber'
 				},
@@ -24,6 +30,9 @@ module.exports = {
 			{
 				type: {
 					type: 'xType'
+				},
+				bind: {
+					type: 'field'
 				},
 				boundaryGap: {
 					type: 'checkbox',
@@ -84,6 +93,33 @@ module.exports = {
 				backgroundColor: {
 					type: 'color',
 					value: { color: '#333', alpha: 70 }
+				}
+			}
+		},
+		toolbox: {
+			type: 'object',
+			value: {
+				show: {
+					type: 'checkbox',
+					value: true
+				},
+				feature: {
+					type: 'object',
+					value: {
+						magicType: {
+							type: 'object',
+							value: {
+								show: {
+									type: 'checkbox',
+									value: true
+								},
+								type: {
+									type: 'magictype',
+									value: ['stack', 'tiled']
+								}
+							}
+						}
+					}
 				}
 			}
 		},

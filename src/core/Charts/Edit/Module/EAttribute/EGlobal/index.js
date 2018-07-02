@@ -43,7 +43,6 @@ class EGlobal extends React.Component {
 		const dom = this.renderDom(actions, global, cache)
 		return (
 			<div className="ca-global">
-				
 				{ dom }
 			</div>
 		)

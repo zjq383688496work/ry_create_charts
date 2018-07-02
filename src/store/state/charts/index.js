@@ -10,19 +10,22 @@ module.exports = {
 		},
 		themes: [{
 			name: '主题1',
-			list: ['color0', 'api0'],
 			config: {
-				api0: {
-					type:  'api',
-					name:  '全局数据',
-					value: {
-						api: ''
+				api: {
+					0: {
+						type:  'api',
+						name:  '全局数据',
+						value: {
+							api: ''
+						}
 					}
 				},
-				color0: {
-					type:  'color',
-					name:  '颜色1',
-					value: { color: '#333', alpha: 100 }
+				color: {
+					0: {
+						type:  'color',
+						name:  '颜色1',
+						value: { color: '#333', alpha: 100 }
+					}
 				}
 			}
 		}]

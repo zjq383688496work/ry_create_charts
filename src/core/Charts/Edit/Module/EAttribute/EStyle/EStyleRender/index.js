@@ -23,6 +23,7 @@ const styleMap = {
 	animation: '动画开关',
 	title: '标题',
 	tooltip: '提示框',
+	toolbox: '工具栏'
 }
 const childStyleMap = {
 	color: '颜色',

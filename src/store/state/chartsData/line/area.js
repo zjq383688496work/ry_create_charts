@@ -8,6 +8,9 @@ module.exports = {
 		}
 	},
 	data: {
+		api: {
+			type: 'api'
+		},
 		series: [
 			{
 				bind: {
@@ -42,7 +45,7 @@ module.exports = {
 				},
 				stack: {
 					type: 'text',
-					value: '总量2'
+					value: '总量'
 				},
 				areaStyle: {
 					type: 'object',
@@ -62,6 +65,9 @@ module.exports = {
 			{
 				type: {
 					type: 'xType'
+				},
+				bind: {
+					type: 'field'
 				},
 				boundaryGap: {
 					type: 'checkbox',
@@ -122,6 +128,33 @@ module.exports = {
 				backgroundColor: {
 					type: 'color',
 					value: { color: '#333', alpha: 70 }
+				}
+			}
+		},
+		toolbox: {
+			type: 'object',
+			value: {
+				show: {
+					type: 'checkbox',
+					value: true
+				},
+				feature: {
+					type: 'object',
+					value: {
+						magicType: {
+							type: 'object',
+							value: {
+								show: {
+									type: 'checkbox',
+									value: true
+								},
+								type: {
+									type: 'magictype',
+									value: ['stack', 'tiled']
+								}
+							}
+						}
+					}
 				}
 			}
 		},

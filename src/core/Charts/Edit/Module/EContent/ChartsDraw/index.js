@@ -91,7 +91,8 @@ class ChartsDraw extends React.Component {
 
 		// !loading && console.log(data)
 		// console.log(idx, loading)
-		// if (!loading) console.log(JSON.stringify(window.charts.chartsFormat(data) || {}))
+		if (!loading) console.log(JSON.stringify(window.charts.chartsFormat(data, cache) || {}))
+		if (!loading) console.log(window.charts.chartsFormat(data, cache) || {})
 		return (
 			<div className="charts-draw">
 				{ loading? <Spin/>: (

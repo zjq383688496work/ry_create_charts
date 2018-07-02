@@ -35,10 +35,17 @@ module.exports = extend(window.charts, {
 		})
 		return obj
 	},
-	dataBind(obj, cache) {
+	dataBind(obj, cache, api) {
 		const { bind, data } = obj
+		const { value } = api
+		let ca
+		if (!bind || !data) return obj
 		const key = bind.value
-		const ca  = cache['api0']
+		if (value === 'custom') {
+			
+		} else {
+			ca = cache[`g_${value}`]
+		}
 		if (!key || !(ca && ca.data)) return obj
 		data.value = ca.data.map((_, i) => {
 			return _[key]
@@ -51,12 +58,12 @@ module.exports = extend(window.charts, {
 		// console.clear()
 		opts = deepCopy(opts)
 		const { data, options } = opts
-		const { series, xAxis, yAxis } = data
+		const { api, series, xAxis, yAxis } = data
 
 		let mod = this.dataFormat(options)
-		mod.series = series.map((_) => this.dataFormat(this.dataBind(_, cache)))
-		xAxis && (mod.xAxis = xAxis.map((_) => this.dataFormat(_)))
-		yAxis && (mod.yAxis = yAxis.map((_) => this.dataFormat(_)))
+		mod.series = series.map((_) => this.dataFormat(this.dataBind(_, cache, api)))
+		xAxis && (mod.xAxis = xAxis.map((_) => this.dataFormat(this.dataBind(_, cache, api))))
+		yAxis && (mod.yAxis = yAxis.map((_) => this.dataFormat(this.dataBind(_, cache, api))))
 
 		// console.log(mod)
 		return mod
