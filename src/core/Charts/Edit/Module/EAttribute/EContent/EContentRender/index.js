@@ -10,7 +10,7 @@
 import React from 'react'
 import './index.less'
 
-import { Card, Checkbox, Collapse, Input, Radio, Select, Tabs } from 'antd'
+import { Card, Checkbox, Collapse, Icon, Input, Radio, Select, Tabs } from 'antd'
 const { Button, Group } = Radio
 const { Panel }   = Collapse
 const { Option }  = Select
@@ -18,7 +18,7 @@ const { TabPane } = Tabs
 
 const cData = require('@state/chartsData/default')
 
-import Color from '@module/Color'
+import ColorCustom from '@module/ColorCustom'
 
 const apis  = [
 	{ name: '无', value: '' },
@@ -51,7 +51,8 @@ const childStyleMap = {
 	text: '文本',
 	left: '对齐',
 
-	boundaryGap: '刻度分隔线'
+	boundaryGap: '刻度分隔线',
+	smooth: '曲线'
 }
 
 class EContentRender extends React.Component {
@@ -87,14 +88,13 @@ class EContentRender extends React.Component {
 	}
 	onChangeAPI(val, parent) {
 		let { actions, data, cache, onChange, curChart } = this.props
-		parent.value.api = val
+		parent.api = val
 		let { id } = curChart,
 			k = `c_${id}`
 		if (!val) {
 			delete cache[k]
 			onChange()
 		} else {
-			debugger
 			cache[k] = {}
 			let arr = ['getData', 'getMap']
 			let promises = arr.map(_ => new Promise(this[_](val, cache[k])))
@@ -103,6 +103,12 @@ class EContentRender extends React.Component {
 				actions.updateCache(cache)
 			})
 		}
+	}
+	onChangeColor = () => {
+		const { global } = this.props
+		const { idx, themes } = global
+		cVar.colors = themes[idx].config.color
+		this.props.onChange()
 	}
 	dataFormat(obj, name) {
 		let { type, value, auth = true } = obj
@@ -145,10 +151,14 @@ class EContentRender extends React.Component {
 	}
 	// 颜色
 	render_color = (val) => {
+		const { global } = this.props
+		const { idx, themes } = global
+		const colors = themes[idx].config.color
 		return (
-			<Color
+			<ColorCustom
 				color={val}
-				onChange={this.props.onChange}
+				colors={colors}
+				onChange={this.onChangeColor}
 			/>
 		)
 	}
@@ -170,15 +180,12 @@ class EContentRender extends React.Component {
 	}
 	// 字段
 	render_field = (val, parent) => {
-		const { cache } = this.props
+		const { cache, curChart } = this.props
+		const { id } = curChart
 		const api = this.props.parent.api
-		const { value, data } = api
-		let ca, opts
-		if (value === 'custom') {
-
-		} else {
-			ca = cache[`g_${value}`]
-		}
+		const { value } = api
+		let opts
+		let ca = value === 'custom'? cache[`c_${id}`]: cache[`g_${value}`]
 		if (ca && ca.map) {
 			const { map } = ca
 			opts = map? Object.keys(map).map((_, i) => <Option key={i+1} value={_}>{map[_]}</Option>): null
@@ -197,38 +204,45 @@ class EContentRender extends React.Component {
 		const tapis = themes[idx].config.api
 		const { api } = parent
 		let opts = deepCopy(cData.api.options)
-		let custom = val === 'custom'
-			? (
-				<Select
-					size="small"
-					style={{ width: 120 }}
-					onChange={v => this.onChangeAPI(v, parent)}
-					value={api}
-				>
-					{ apis.map((_, i) => (<Option key={i} value={_.value}>{_.name}</Option>)) }
-				</Select>
-			)
-			: null
 		Object.keys(tapis).map((_, i) => {
 			opts.push({ name: tapis[_].name, value: _ })
 		})
 		let dom = opts.map((_, i) => {
 			return <Option key={i} value={_.value}>{_.name}</Option>
 		})
+		let custom = (
+			<Select
+				size="small"
+				style={{ width: 90 }}
+				onChange={v => this.onChangeAPI(v, parent)}
+				value={api}
+			>
+				{ apis.map((_, i) => (<Option key={i} value={_.value}>{_.name}</Option>)) }
+			</Select>
+		)
+		let select = (
+			<Select value={val} style={{ width: 90, marginRight: 10 }} onChange={v => this.onChange(v, parent)}>
+				{ dom }
+			</Select>
+		)
 		return (
 			<div>
-				{ custom }
+				{ select }
+				{ val === 'custom'? custom: null }
 			</div>
 		)
-				// <Select value={val} style={{ width: 120 }} onChange={v => this.onChange(v, parent)}>
-				// 	{ dom }
-				// </Select>
 	}
 
 	renderDom(data, name) {
+		let len = data.length
 		return data.map((_, i) => {
+			var remove = len > 1
+				? (
+					<a className="btn-remove" onClick={this.removeItem.bind(this, i)}><Icon type="close" /></a>
+				)
+				: false
 			return (
-				<Card key={i} title={`${styleMap[name]}${i+1}`}>
+				<Card key={i} title={`${styleMap[name]}${i+1}`} extra={remove}>
 					{
 						Object.keys(_).map((p, j) => {
 							return <div key={j}>{ this.dataFormat(_[p], p) }</div>
@@ -263,17 +277,40 @@ class EContentRender extends React.Component {
 			</div>
 		)
 	}
+	addItem = () => {
+		const { data, onChange } = this.props
+		data.push(deepCopy(data[0]))
+		onChange()
+	}
+	removeItem = (idx) => {
+		const { data, onChange } = this.props
+		data.splice(idx, 1)
+		onChange()
+	}
+	renderAdd(data, name) {
+		if (name === 'api') return false
+		return (
+			<div className="ca-row">
+				<div className="car-name"></div>
+				<div className="car-ctrl">
+					<a className="btn-add" onClick={this.addItem}><Icon type="plus" /></a>
+				</div>
+			</div>
+		)
+	}
 
 	render() {
 		const { actions, data, name } = this.props
 		const stack = this.renderStack(data, name)
 		const dom = this[`render${name === 'api'? 'Api': 'Dom'}`](data, name)
+		const add = this.renderAdd(data, name)
 		return (
 			<div className="ca-content-render">
 				<Collapse defaultActiveKey={['1']}>
 					<Panel header={styleMap[name]} key="1">
 						{ stack }
 						{ dom }
+						{ add }
 					</Panel>
 				</Collapse>
 			</div>

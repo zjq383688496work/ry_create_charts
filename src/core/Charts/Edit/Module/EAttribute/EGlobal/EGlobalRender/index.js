@@ -20,9 +20,8 @@ const cData  = require('@state/chartsData/default')
 import Color from '@module/Color'
 
 const styleMap = {
-	animation: '动画开关',
-	title: '标题',
-	tooltip: '提示框',
+	api: '接口',
+	color: '颜色'
 }
 const childStyleMap = {
 	color: '颜色',
@@ -74,7 +73,7 @@ class EGlobalRender extends React.Component {
 	}
 	onChangeAPI(val, parent, key) {
 		let { actions, data, cache, onChange } = this.props
-		let k = `c_${key}`
+		let k = `g_${key}`
 		parent.value.api = val
 		if (!val) {
 			delete cache[k]
@@ -92,7 +91,6 @@ class EGlobalRender extends React.Component {
 	dataTheme(obj) {
 		let { config } = obj
 		let { api, color } = config
-
 		return Object.keys(config).map((_, i) => {
 			let nod = config[_],
 				dom = Object.keys(nod).map((p, j) => {
@@ -108,7 +106,7 @@ class EGlobalRender extends React.Component {
 					)
 				})
 			return (
-				<Card title={_} key={i}>
+				<Card title={styleMap[_] || _} key={i}>
 					{ dom }
 				</Card>
 			)
@@ -160,14 +158,13 @@ class EGlobalRender extends React.Component {
 		const dom = this.dataTheme(data)
 		return (
 			<div className="ca-global-render">
-				{ dom }
+				<Collapse defaultActiveKey={['1']}>
+					<Panel header={'配置项'} key="1">
+						{ dom }
+					</Panel>
+				</Collapse>
 			</div>
 		)
-				// <Collapse defaultActiveKey={['1']}>
-				// 	<Panel header={'配置项'} key="1">
-				// 		{ dom }
-				// 	</Panel>
-				// </Collapse>
 	}
 }
 

@@ -30,9 +30,13 @@ class EAttribute extends React.Component {
 	}
 
 	render() {
+		const { global } = this.props
+		const { idx, themes } = global
+		const colors = (themes[idx] || themes[0]).config.color
+		cVar.colors = colors
 		return (
 			<div className="charts-attr">
-				<Tabs type="card" animated={false} defaultActiveKey="global">
+				<Tabs type="card" animated={false} defaultActiveKey="content">
 					<TabPane tab="内容" key="content">
 						<EContent {...this.props} />
 					</TabPane>

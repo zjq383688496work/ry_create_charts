@@ -77,12 +77,12 @@ class ChartsDraw extends React.Component {
 
 	getData(time) {
 		const { data } = this.props
-		setTimeout(() => {
+		// setTimeout(() => {
 			this.setState({
 				data: data,
 				loading: false
 			})
-		}, time || 0)
+		// }, time || 0)
 	}
 
 	render() {

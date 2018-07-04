@@ -33,31 +33,17 @@ module.exports = {
 						}
 					}
 				},
-				type: {
-					type: 'type',
-					value: 'line',
-					auth: false
-				}
-			},
-			{
-				bind: {
-					type: 'field'
-				},
-				data: {
-					type: 'dataNumber'
-				},
-				stack: {
-					type: 'text',
-					value: '总量',
-					auth: false
-				},
-				areaStyle: {
+				lineStyle: {
 					type: 'object',
 					value: {
-						normal: {
-							type: 'object'
+						color: {
+							type: 'color'
 						}
 					}
+				},
+				smooth: {
+					type: 'checkbox',
+					value: false
 				},
 				type: {
 					type: 'type',
@@ -110,8 +96,7 @@ module.exports = {
 					type: 'object',
 					value: {
 						color: {
-							type: 'color',
-							value: { color: '#333', alpha: 100 }
+							type: 'textcolor'
 						}
 					}
 				}
@@ -132,37 +117,10 @@ module.exports = {
 				},
 				backgroundColor: {
 					type: 'color',
-					value: { color: '#333', alpha: 70 }
+					value: { type: 'custom', color: '#333', alpha: 70 }
 				}
 			}
-		},
-		toolbox: {
-			type: 'object',
-			value: {
-				show: {
-					type: 'checkbox',
-					value: true
-				},
-				feature: {
-					type: 'object',
-					value: {
-						magicType: {
-							type: 'object',
-							value: {
-								show: {
-									type: 'checkbox',
-									value: true
-								},
-								type: {
-									type: 'magictype',
-									value: ['stack', 'tiled']
-								}
-							}
-						}
-					}
-				}
-			}
-		},
+		},		
 		animation: {
 			type: 'animation'
 		}

@@ -13,7 +13,8 @@ module.exports = {
 	// 文本
 	text:          { type: 'input', default: '' },
 	// 颜色
-	color:         { type: 'color', default: { color: '#333', alpha: 100 } },
+	textcolor:     { type: 'color', default: { type: 'custom', color: '#333', alpha: 100 } },
+	color:         { type: 'color', default: { type: 'null', color: '#333', alpha: 100 } },
 	// 水平对齐
 	align:         { type: 'radio', default: 'null', options: [
 		{ name: '无',   value: 'null' },

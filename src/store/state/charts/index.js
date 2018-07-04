@@ -1,3 +1,24 @@
+const colors = [
+	'#c23531',
+	'#2f4554',
+	'#61a0a8',
+	'#d48265',
+	'#91c7ae',
+	'#749f83',
+	'#ca8622',
+	'#bda29a',
+	'#6e7074',
+	'#546570',
+	'#c4ccd3'
+]
+const colorObj = {}
+colors.map((_, i) => {
+	colorObj[i] = {
+		type:  'color',
+		name:  `颜色${i + 1}`,
+		value: { color: _, alpha: 100 }
+	}
+})
 // 图表数据大纲
 module.exports = {
 
@@ -25,13 +46,7 @@ module.exports = {
 						}
 					}
 				},
-				color: {
-					0: {
-						type:  'color',
-						name:  '颜色1',
-						value: { color: '#333', alpha: 100 }
-					}
-				}
+				color: colorObj
 			}
 		}]
 	}

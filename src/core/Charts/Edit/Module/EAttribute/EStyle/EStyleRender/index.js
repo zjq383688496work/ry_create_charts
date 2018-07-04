@@ -20,7 +20,7 @@ const cData  = require('@state/chartsData/default')
 import Color from '@module/Color'
 
 const styleMap = {
-	animation: '动画开关',
+	animation: '动画',
 	title: '标题',
 	tooltip: '提示框',
 	toolbox: '工具栏'
@@ -34,7 +34,8 @@ const childStyleMap = {
 	verticalAlign: '垂直对齐',
 	show: '显示',
 	text: '文本',
-	left: '对齐'
+	left: '对齐',
+	animation: '开关'
 }
 
 class EStyleRender extends React.Component {

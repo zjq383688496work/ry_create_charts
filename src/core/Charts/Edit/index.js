@@ -42,7 +42,6 @@ class EditComponent extends React.Component {
 		const { actions, editConfig } = this.props
 		const { render } = this.state
 		const { config, curData, curChart, global, cache } = editConfig
-
 		return (
 			<div className="lay-win flex-col">
 				<div className="lay-header">

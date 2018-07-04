@@ -9,7 +9,8 @@ module.exports = {
 	},
 	data: {
 		api: {
-			type: 'api'
+			type: 'api',
+			api: ''
 		},
 		series: [
 			{
@@ -21,11 +22,21 @@ module.exports = {
 				},
 				stack: {
 					type: 'text',
-					value: '总量'
+					value: '总量',
+					auth: false
+				},
+				lineStyle: {
+					type: 'object',
+					value: {
+						color: {
+							type: 'color'
+						}
+					}
 				},
 				type: {
 					type: 'type',
-					value: 'line'
+					value: 'line',
+					auth: false
 				},
 				smooth: {
 					type: 'checkbox'
@@ -76,8 +87,7 @@ module.exports = {
 					type: 'object',
 					value: {
 						color: {
-							type: 'color',
-							value: { color: '#333', alpha: 100 }
+							type: 'textcolor'
 						}
 					}
 				}
@@ -98,7 +108,7 @@ module.exports = {
 				},
 				backgroundColor: {
 					type: 'color',
-					value: { color: '#333', alpha: 70 }
+					value: { type: 'custom', color: '#333', alpha: 70 }
 				}
 			}
 		},
