@@ -26,6 +26,7 @@ Object.assign(config, {
 	cache: true,
 	devtool: 'eval-source-map',
 	devServer: {
+		host: '0.0.0.0',
 		port: port,
 		historyApiFallback: true,
 		stats: 'errors-only',
