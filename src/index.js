@@ -1,13 +1,6 @@
-/*
-* @Author: Liao Hui
-* @Date:   2018-04-13T18:13:16+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-18T19:44:00+08:00
-*/
-
 import 'core-js/fn/object/assign'
 import React        from 'react'
-import ReactDOM     from 'react-dom'
+import { render }   from 'react-dom'
 import { Provider } from 'react-redux'
 import thunk        from 'redux-thunk'
 import reducer      from '@store/reducers'
@@ -33,7 +26,7 @@ const store = createStore(
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-ReactDOM.render((
+render((
 	<Provider store={store}>
 		<Router history={hashHistory}>
 			<Route path="charts" component={Charts}>

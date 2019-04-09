@@ -2,8 +2,6 @@ const path  = require('path')
 const projectRoot = process.cwd()
 const webpack = require('webpack')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
-// const CopyWebpackPlugin = require('copy-webpack-plugin')
-// const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 let moduleName = 'wxa'
 let staticName = `${moduleName}_static`
